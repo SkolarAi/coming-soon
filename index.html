@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkolarAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/"
+          }
+        }
+    </script>
+</head>
+<body>
+    <div class="gradient-blur"></div>
+    <div id="canvas-container"></div>
+    <main class="content">
+        <div class="logo-container">
+            <h1>Skolar<span class="gradient-text-simple">Ai</span></h1>
+        </div>
+        
+        <div class="message-container">
+            <p class="tagline">Reimagining what's possible with <span class="gradient-text-simple">Ai</span></p>
+            <p class="teaser">A quiet revolution in learning is underway</p>
+            <div class="launch-date">
+                <span id="typed-text"></span><span class="blinking-cursor">|</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 SkolarAi. All rights reserved.</p>
+        </footer>
+    </main>
+    <script type="module" src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "Arriving in 2025";
+            const typedTextElement = document.getElementById('typed-text');
+            const cursor = document.querySelector('.blinking-cursor');
+            let charIndex = 0;
+            
+            // Hide cursor initially
+            cursor.style.opacity = '0';
+            
+            // Start typing after a delay
+            setTimeout(() => {
+                cursor.style.opacity = '1';
+                typeText();
+            }, 1000);
+
+            function typeText() {
+                if (charIndex < text.length) {
+                    typedTextElement.textContent += text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeText, 100); // Adjust typing speed here
+                } else {
+                    // Hide cursor after complete
+                    setTimeout(() => {
+                        cursor.style.opacity = '0';
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
