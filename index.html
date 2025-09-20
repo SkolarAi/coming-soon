@@ -1,72 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkolarAI</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script type="importmap">
-        {
-          "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/"
-          }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkolarAi Robo Club – Pamphlet</title>
+  <!-- Lucide icons (CDN) -->
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-top: #0b1220; /* slate-950-ish */
+      --bg-mid: #0e1626; /* slate-900-ish */
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.7);
+      --muted2: rgba(255,255,255,.5);
+      --card: rgba(255,255,255,.05);
+      --border: rgba(255,255,255,.1);
+      --ring: rgba(255,255,255,.15);
+      --grad-a: #6366f1; /* indigo-500 */
+      --grad-b: #d946ef; /* fuchsia-500 */
+      --grad-c: #22d3ee; /* cyan-400 */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: linear-gradient(to bottom, var(--bg-top), var(--bg-mid), var(--bg-top));
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 700; border: 0; cursor: pointer;
+      padding: 10px 16px; border-radius: 14px;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--grad-a), var(--grad-b), var(--grad-c));
+      color: #0b1220; box-shadow: 0 10px 30px rgba(79,70,229,.3);
+    }
+    .btn-ghost { border: 1px solid var(--border); background: transparent; color: var(--text); }
+    .btn-white { background: #fff; color: #0b1220; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+
+    /* Header */
+    .header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(11,18,32,.5);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge {
+      width: 36px; height: 36px; display: grid; place-items: center; border-radius: 14px;
+      background: linear-gradient(135deg, var(--grad-a), var(--grad-b), var(--grad-c));
+      box-shadow: 0 10px 24px rgba(217,70,239,.2);
+    }
+    .nav { display: none; gap: 24px; color: rgba(255,255,255,.8); }
+    @media (min-width: 768px) { .nav { display: flex; } }
+    .nav a:hover { color: #fff; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .blob-a, .blob-b { position: absolute; filter: blur(48px); opacity: .4; }
+    .blob-a { top: -120px; right: -120px; width: 18rem; height: 18rem; background: var(--grad-b); border-radius: 999px; }
+    .blob-b { bottom: -120px; left: -120px; width: 18rem; height: 18rem; background: var(--grad-c); border-radius: 999px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--ring); background: rgba(255,255,255,.05); color: rgba(255,255,255,.8); }
+    .hero h2 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 56px); line-height: 1.1; font-weight: 800; }
+    .gradient-text { background: linear-gradient(90deg, #a5b4fc, #f0abfc, #67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
+    .hero p { margin-top: 12px; color: rgba(255,255,255,.8); line-height: 1.6; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+    .hero-bullets { display: flex; align-items: center; gap: 16px; margin-top: 16px; color: var(--muted); font-size: 12px; }
+
+    /* Sections */
+    section { padding: 48px 0; }
+    .card { border: 1px solid var(--border); background: var(--card); border-radius: 24px; padding: 24px; }
+
+    /* Grid helpers */
+    .grid { display: grid; gap: 24px; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1280px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+    /* Timeline */
+    .timeline { position: relative; border-left: 1px solid var(--border); margin-left: 1rem; }
+    .timeline-item { position: relative; margin: 0 0 24px 0; padding-left: 24px; }
+    .timeline-index {
+      position: absolute; left: -14px; top: 0; width: 24px; height: 24px; display: grid; place-items: center;
+      background: #fff; color: #0b1220; border-radius: 999px; box-shadow: 0 0 0 8px rgba(2,6,23,.6);
+    }
+
+    /* CTA banner */
+    .cta { background: linear-gradient(90deg, rgba(79,70,229,.6), rgba(217,70,239,.6), rgba(34,211,238,.6)); border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; gap: 24px; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Inputs */
+    input, textarea { width: 100%; color: var(--text); padding: 10px 12px; border-radius: 12px; outline: none; border: 1px solid var(--ring); background: rgba(255,255,255,.05); }
+    input:focus, textarea:focus { box-shadow: 0 0 0 2px rgba(217,70,239,.4); border-color: transparent; }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.7); padding: 16px; z-index: 50; }
+    .modal.open { display: grid; }
+    .modal-card { width: 100%; max-width: 640px; background: #0b1220; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 20px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+
+    /* Utilities */
+    .muted { color: var(--muted); }
+    .muted2 { color: var(--muted2); }
+    .title { font-size: 28px; font-weight: 800; }
+    .subtitle { text-transform: uppercase; letter-spacing: .2em; font-size: 12px; color: rgba(255,255,255,.6); display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .center { text-align: center; }
+    .icon { width: 20px; height: 20px; }
+    .icon-lg { width: 24px; height: 24px; }
+  </style>
 </head>
 <body>
-    <div class="gradient-blur"></div>
-    <div id="canvas-container"></div>
-    <main class="content">
-        <div class="logo-container">
-            <h1>Skolar<span class="gradient-text-simple">Ai</span></h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge"><i data-lucide="bot" class="icon"></i></div>
+        <div>
+          <p style="margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.2em; color: rgba(255,255,255,.7)">SkolarAi</p>
+          <h1 style="margin:0; font-size:18px; font-weight:700;">Robo Club</h1>
         </div>
-        
-        <div class="message-container">
-            <p class="tagline">Your AI tutor that adapts to your learning style in real time.</p>
-            <p class="teaser">A quiet revolution in learning is underway</p>
-            <div class="launch-date">
-                <span id="typed-text"></span><span class="blinking-cursor">|</span>
+      </div>
+      <nav class="nav">
+        <a href="#eligibility">Eligibility</a>
+        <a href="#admission">Admission</a>
+        <a href="#syllabus">Syllabus</a>
+      </nav>
+      <button class="btn btn-white" id="applyTop">
+        Apply Now <i data-lucide="chevron-right" class="icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="blob-a"></div>
+    <div class="blob-b"></div>
+    <div class="container" style="padding:64px 0 72px;">
+      <div class="grid grid-2" style="align-items:center;">
+        <div>
+          <span class="eyebrow"><i data-lucide="sparkles" class="icon"></i> Admissions Open</span>
+          <h2>Build. Learn. Ship.
+            <span class="gradient-text">Your first robot with AI.</span>
+          </h2>
+          <p>A premium after‑school club for high‑potential students (ages 12–15) to learn Python, Machine Learning, and Robotics—culminating in a real project showcase.</p>
+          <div class="hero-cta">
+            <button class="btn btn-primary" id="getProspectus">Get Prospectus</button>
+            <a class="btn btn-ghost" href="#syllabus">View Syllabus</a>
+          </div>
+          <div class="hero-bullets">
+            <span><i data-lucide="check-circle-2" class="icon"></i> Mentor‑led</span>
+            <span><i data-lucide="check-circle-2" class="icon"></i> Project‑based</span>
+            <span><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eligibility -->
+  <section id="eligibility">
+    <div class="container">
+      <div class="card">
+        <h3 class="title">Eligibility</h3>
+        <div class="grid grid-3" style="margin-top: 16px;">
+          <div class="card center" style="transition: transform .2s;">
+            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
+            <p style="margin:8px 0 0;">12–15 years old</p>
+          </div>
+          <div class="card center" style="transition: transform .2s;">
+            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
+            <p style="margin:8px 0 0;">Good academic record</p>
+          </div>
+          <div class="card center" style="transition: transform .2s;">
+            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
+            <p style="margin:8px 0 0;">Bring your own laptop (recommended): RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admission Process -->
+  <section id="admission">
+    <div class="container">
+      <div class="subtitle"><i data-lucide="notebook-pen" class="icon"></i> Admission Process</div>
+      <ol class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-index">1</span>
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <i data-lucide="notebook-pen" class="icon"></i>
+              <h4 style="margin:0; font-size:18px; font-weight:700;">Registration Form</h4>
             </div>
+            <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill out the online application with guardian details.</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-index">2</span>
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <i data-lucide="flask-conical" class="icon"></i>
+              <h4 style="margin:0; font-size:18px; font-weight:700;">Math Admission Test (1 hr)</h4>
+            </div>
+            <p class="muted" style="margin:8px 0 0; font-size:14px;">Objective test to gauge fundamentals & curiosity.</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-index">3</span>
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <i data-lucide="brain-circuit" class="icon"></i>
+              <h4 style="margin:0; font-size:18px; font-weight:700;">Cognitive Personality Test</h4>
+            </div>
+            <p class="muted" style="margin:8px 0 0; font-size:14px;">A short assessment to understand learning style.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Syllabus -->
+  <section id="syllabus">
+    <div class="container">
+      <div class="subtitle"><i data-lucide="brain-circuit" class="icon"></i> Syllabus Overview</div>
+      <div class="grid grid-4">
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="cpu" class="icon-lg"></i>
+            <h4 style="margin:0; font-size:18px; font-weight:700;">Basic Python</h4>
+          </div>
+          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Variables</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Data types</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Loops</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Functions</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Hands‑on labs</li>
+          </ul>
+          <p class="muted2" style="margin-top:12px; font-size:12px;">Foundation for thinking like a programmer.</p>
+        </article>
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="graduation-cap" class="icon-lg"></i>
+            <h4 style="margin:0; font-size:18px; font-weight:700;">Basic ML</h4>
+          </div>
+          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Intro to ML</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Linear Regression (2 projects)</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Logistic Regression (2 projects)</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Concepts over depth</li>
+          </ul>
+          <p class="muted2" style="margin-top:12px; font-size:12px;">We introduce ML gently—no heavy math required.</p>
+        </article>
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="bot" class="icon-lg"></i>
+            <h4 style="margin:0; font-size:18px; font-weight:700;">Basics of Robotics</h4>
+          </div>
+          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Sensors & actuators</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Control basics</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Safety & ethics</li>
+          </ul>
+          <p class="muted2" style="margin-top:12px; font-size:12px;">Build confidence with real hardware.</p>
+        </article>
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="sparkles" class="icon-lg"></i>
+            <h4 style="margin:0; font-size:18px; font-weight:700;">Final Robotics Project</h4>
+          </div>
+          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Team build</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Demo day</li>
+            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</li>
+          </ul>
+          <p class="muted2" style="margin-top:12px; font-size:12px;">Ship a working robot by the end!</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div class="grid grid-2" style="align-items:center;">
+          <div>
+            <h3 class="title">Ready to join SkolarAi Robo Club?</h3>
+            <p class="muted" style="margin-top: 8px;">Seats are limited. Apply today and we’ll email the test schedule and next steps.</p>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="btn btn-white" id="applyCta">Apply in 2 minutes</button>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <footer>
-            <p>© 2025 SkolarAi. All rights reserved.</p>
-        </footer>
-    </main>
-    <script type="module" src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const text = "Arriving in 2025";
-            const typedTextElement = document.getElementById('typed-text');
-            const cursor = document.querySelector('.blinking-cursor');
-            let charIndex = 0;
-            
-            // Hide cursor initially
-            cursor.style.opacity = '0';
-            
-            // Start typing after a delay
-            setTimeout(() => {
-                cursor.style.opacity = '1';
-                typeText();
-            }, 1000);
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="padding: 24px 0;">
+      <div class="footer-grid">
+        <div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="bot" class="icon"></i>
+            <span style="font-weight:700;">SkolarAi Robo Club</span>
+          </div>
+          <p class="muted2" style="margin-top:8px;">Nurturing young builders with code, curiosity, and robots.</p>
+        </div>
+        <div>
+          <p style="font-weight:700; margin:0 0 8px 0;">Quick Links</p>
+          <ul style="margin:0; padding-left: 18px;">
+            <li><a href="#eligibility">Eligibility</a></li>
+            <li><a href="#admission">Admission Process</a></li>
+            <li><a href="#syllabus">Syllabus</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; margin:0 0 8px 0;">Contact</p>
+          <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="phone" class="icon"></i> <span>+91‑XXXXXXXXXX</span></div>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:8px;"><i data-lucide="mail" class="icon"></i> <span>hello@skolarai.example</span></div>
+        </div>
+      </div>
+      <div class="muted2" style="margin-top: 12px; font-size:12px;">© <span id="year"></span> SkolarAi. All rights reserved.</div>
+    </div>
+  </footer>
 
-            function typeText() {
-                if (charIndex < text.length) {
-                    typedTextElement.textContent += text.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeText, 100); // Adjust typing speed here
-                } else {
-                    // Hide cursor after complete
-                    setTimeout(() => {
-                        cursor.remove();
-                    }, 1000);
-                }
-            }
-        });
-    </script>
+  <!-- Modal -->
+  <div class="modal" id="applyModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <h4 style="margin:0; font-size:18px; font-weight:700;">Apply to Robo Club</h4>
+        <button id="closeModal" class="muted" style="background:none; border:0; color:inherit; cursor:pointer;">Close</button>
+      </div>
+      <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill this quick form and we will share the admission test schedule via email.</p>
+      <form id="applyForm" style="margin-top:12px; display:grid; gap:12px;">
+        <div class="grid grid-2">
+          <input placeholder="Student Name" required />
+          <input placeholder="Age (12–15)" type="number" min="12" max="15" required />
+        </div>
+        <input placeholder="Parent Email" type="email" required />
+        <input placeholder="Parent Phone" type="tel" required />
+        <textarea placeholder="Tell us about the student's interests" rows="4"></textarea>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Initialize icons
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // Modal logic
+    const modal = document.getElementById('applyModal');
+    const openers = [document.getElementById('applyTop'), document.getElementById('applyCta'), document.getElementById('getProspectus')];
+    const closeBtn = document.getElementById('closeModal');
+
+    openers.forEach(btn => btn && btn.addEventListener('click', () => {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }));
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Form submission demo
+    document.getElementById('applyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("Submitted! We'll be in touch soon.");
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      e.target.reset();
+    });
+  </script>
 </body>
-</html> 
+</html>
