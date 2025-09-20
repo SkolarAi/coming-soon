@@ -70,7 +70,33 @@
     .gradient-text { background: linear-gradient(90deg, #a5b4fc, #f0abfc, #67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
     .hero p { margin-top: 12px; color: rgba(255,255,255,.8); line-height: 1.6; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-    .hero-bullets { display: flex; align-items: center; gap: 16px; margin-top: 16px; color: var(--muted); font-size: 12px; }
+    .hero-bullets{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;          /* allow wrap on smaller widths */
+    margin-top:16px;         /* was 1px -> gives breathing room */
+    font-size:13px;          /* a bit larger for readability */
+    color: rgba(255,255,255,.9);
+    }
+
+    .hero-bullets .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--ring);
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.18);
+    }
+
+    .hero-bullets .chip svg{
+    width:18px; height:18px; 
+    stroke-width:1.75;       /* crisper checkmark */
+    }
+
 
     /* Sections */
     section { padding: 48px 0; }
@@ -88,6 +114,41 @@
       position: absolute; left: -14px; top: 0; width: 24px; height: 24px; display: grid; place-items: center;
       background: #fff; color: #0b1220; border-radius: 999px; box-shadow: 0 0 0 8px rgba(2,6,23,.6);
     }
+
+    /* Admission timeline */
+    #admission .timeline{
+    list-style:none;          /* hide default 1., 2., 3. */
+    padding-left:0;
+    margin-left:1rem;
+    border-left:1px solid var(--border);
+    counter-reset: step;      /* CSS counter for circles */
+    }
+    #admission .timeline-item{
+    position:relative;
+    margin:0 0 28px;
+    padding-left:28px;        /* space for the circle */
+    }
+    #admission .timeline-index{
+    position:absolute; left:-14px; top:0;
+    width:28px; height:28px; display:grid; place-items:center;
+    background:#fff; color:#0b1220; border-radius:999px;
+    font-weight:700;
+    box-shadow: 0 0 0 8px rgba(2,6,23,.6), 0 2px 8px rgba(0,0,0,.2);
+    }
+    #admission .timeline-index::before{
+    counter-increment: step;
+    content: counter(step);   /* auto 1,2,3… */
+    }
+
+    /* Nicer step cards */
+    .card.card--step{
+    border:1px solid rgba(255,255,255,.12);
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    border-radius:24px;
+    padding:20px 22px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .card.card--step:hover{ border-color: rgba(255,255,255,.2); transform: translateY(-1px); transition: all .2s; }
 
     /* CTA banner */
     .cta { background: linear-gradient(90deg, rgba(79,70,229,.6), rgba(217,70,239,.6), rgba(34,211,238,.6)); border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
@@ -154,10 +215,10 @@
             <button class="btn btn-primary" id="getProspectus">Get Prospectus</button>
             <a class="btn btn-ghost" href="#syllabus">View Syllabus</a>
           </div>
-          <div class="hero-bullets">
-            <span><i data-lucide="check-circle-2" class="icon"></i> Mentor‑led</span>
-            <span><i data-lucide="check-circle-2" class="icon"></i> Project‑based</span>
-            <span><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</span>
+          <div class="hero-bullets" role="list" aria-label="Program highlights">
+            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Mentor-led</span>
+            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Project-based</span>
+            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Parent showcase</span>
           </div>
         </div>
       </div>
@@ -193,36 +254,38 @@
       <div class="subtitle"><i data-lucide="notebook-pen" class="icon"></i> Admission Process</div>
       <ol class="timeline">
         <li class="timeline-item">
-          <span class="timeline-index">1</span>
-          <div class="card">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
             <div style="display:flex; align-items:center; gap:8px;">
-              <i data-lucide="notebook-pen" class="icon"></i>
-              <h4 style="margin:0; font-size:18px; font-weight:700;">Registration Form</h4>
+                <i data-lucide="notebook-pen" class="icon"></i>
+                <h4 style="margin:0; font-size:18px; font-weight:700;">Registration Form</h4>
             </div>
             <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill out the online application with guardian details.</p>
-          </div>
+            </div>
         </li>
+
         <li class="timeline-item">
-          <span class="timeline-index">2</span>
-          <div class="card">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
             <div style="display:flex; align-items:center; gap:8px;">
-              <i data-lucide="flask-conical" class="icon"></i>
-              <h4 style="margin:0; font-size:18px; font-weight:700;">Math Admission Test (1 hr)</h4>
+                <i data-lucide="flask-conical" class="icon"></i>
+                <h4 style="margin:0; font-size:18px; font-weight:700;">Math Admission Test (1 hr)</h4>
             </div>
             <p class="muted" style="margin:8px 0 0; font-size:14px;">Objective test to gauge fundamentals & curiosity.</p>
-          </div>
+            </div>
         </li>
+
         <li class="timeline-item">
-          <span class="timeline-index">3</span>
-          <div class="card">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
             <div style="display:flex; align-items:center; gap:8px;">
-              <i data-lucide="brain-circuit" class="icon"></i>
-              <h4 style="margin:0; font-size:18px; font-weight:700;">Cognitive Personality Test</h4>
+                <i data-lucide="brain-circuit" class="icon"></i>
+                <h4 style="margin:0; font-size:18px; font-weight:700;">Cognitive Personality Test</h4>
             </div>
             <p class="muted" style="margin:8px 0 0; font-size:14px;">A short assessment to understand learning style.</p>
-          </div>
+            </div>
         </li>
-      </ol>
+        </ol>
     </div>
   </section>
 
@@ -324,8 +387,8 @@
         </div>
         <div>
           <p style="font-weight:700; margin:0 0 8px 0;">Contact</p>
-          <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="phone" class="icon"></i> <span>+91‑XXXXXXXXXX</span></div>
-          <div style="display:flex; align-items:center; gap:8px; margin-top:8px;"><i data-lucide="mail" class="icon"></i> <span>hello@skolarai.example</span></div>
+          <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="phone" class="icon"></i> <span>+91‑8005345047</span></div>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:8px;"><i data-lucide="mail" class="icon"></i> <span>admin@skolarai.com</span></div>
         </div>
       </div>
       <div class="muted2" style="margin-top: 12px; font-size:12px;">© <span id="year"></span> SkolarAi. All rights reserved.</div>
