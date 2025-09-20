@@ -97,6 +97,123 @@
     stroke-width:1.75;       /* crisper checkmark */
     }
 
+    /* — Coming Soon Card — */
+    .coming-card{
+    position: relative;
+    border-radius: 28px;
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--text);
+    background:
+        radial-gradient(120% 100% at 10% 0%, rgba(217,70,239,.12) 0%, rgba(79,70,229,.06) 40%, transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter: blur(10px);
+    isolation: isolate;                 /* keeps shine inside */
+    overflow: hidden;                    /* clip effects */
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    animation: cardFloat 6s ease-in-out infinite;
+    }
+    .coming-card:hover{
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,.22);
+    box-shadow: 0 16px 60px rgba(0,0,0,.45);
+    }
+
+    /* Gradient border sheen */
+    .coming-card::before{
+    content: "";
+    position: absolute; inset: 0; border-radius: 28px;
+    padding: 1px;                          /* border thickness */
+    background: conic-gradient(
+        from 180deg,
+        rgba(99,102,241,.55),
+        rgba(217,70,239,.55),
+        rgba(34,211,238,.55),
+        rgba(99,102,241,.55)
+    );
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: .45;
+    pointer-events: none;
+    }
+
+    /* Soft glow orb */
+    .coming-card::after{
+    content:"";
+    position:absolute; width:280px; height:280px; right:-120px; top:-140px;
+    background: radial-gradient(closest-side, rgba(217,70,239,.28), transparent 70%);
+    filter: blur(18px);
+    z-index: -1;
+    }
+
+    /* Title */
+    .coming-card h3{
+    margin: 0 0 10px;
+    font-size: clamp(22px, 3.2vw, 30px);
+    font-weight: 800;
+    letter-spacing:.2px;
+    }
+
+    /* City badge (optional) */
+    .coming-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px; font-weight:700;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    margin-bottom: 10px;
+    }
+
+    /* Subtext */
+    .coming-card p{
+    margin: 10px 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+    }
+
+    /* CTA chip (optional) */
+    .coming-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:14px;
+    padding:8px 12px; border-radius:999px;
+    border:1px solid var(--ring);
+    background: rgba(255,255,255,.06);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    font-size: 12px; font-weight:600;
+    }
+
+    /* Shine sweep on hover */
+    .coming-card:hover .shine{ opacity:.9; transform: translateX(120%); }
+    .shine{
+    position:absolute; top:0; left:-120%;
+    width:40%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.20), transparent);
+    filter: blur(10px);
+    transform: translateX(0);
+    transition: transform .8s ease, opacity .8s ease;
+    opacity:.0;
+    pointer-events:none;
+    }
+
+    /* Motion */
+    @keyframes cardFloat{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-4px); }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+    .coming-card, .coming-card:hover{ animation:none; transform:none; }
+    .shine{ transition:none; }
+    }
 
     /* Sections */
     section { padding: 48px 0; }
@@ -221,6 +338,26 @@
             <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Parent showcase</span>
           </div>
         </div>
+        <!-- ✅ NEW RIGHT CARD -->
+        <div class="coming-card">
+            <span class="shine" aria-hidden="true"></span>
+
+            <div class="coming-badge">
+                <i data-lucide="map-pin" class="icon"></i> New City
+            </div>
+
+            <h3>
+                Coming soon in <span class="gradient-text">Lucknow</span>
+            </h3>
+
+            <p class="muted">
+                We’re coming to the city of nawabs! Join the waitlist for early-bird admissions and launch dates.
+            </p>
+
+            <div class="coming-chip">
+                <i data-lucide="clock" class="icon"></i> Waitlist opens soon
+            </div>
+    </div>
       </div>
     </div>
   </section>
@@ -241,7 +378,7 @@
           </div>
           <div class="card center" style="transition: transform .2s;">
             <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p style="margin:8px 0 0;">Bring your own laptop (recommended): RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB</p>
+            <p style="margin:8px 0 0;">Bring your own laptop (RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB recommended)</p>
           </div>
         </div>
       </div>
