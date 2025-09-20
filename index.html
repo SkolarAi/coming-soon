@@ -60,6 +60,17 @@
     @media (min-width: 768px) { .nav { display: flex; } }
     .nav a:hover { color: #fff; }
 
+    .brand-link{
+    display:flex; align-items:center; gap:12px;
+    text-decoration:none; color:inherit;
+    }
+    .brand-link:focus-visible{
+    outline: 2px solid rgba(217,70,239,.6); outline-offset: 4px;
+    border-radius: 14px;
+    }
+    .brand-link:hover .brand-badge{ transform: translateY(-1px) scale(1.02); }
+    .brand-badge{ transition: transform .18s ease; }
+
     /* Hero */
     .hero { position: relative; overflow: hidden; }
     .blob-a, .blob-b { position: absolute; filter: blur(48px); opacity: .4; }
@@ -298,23 +309,30 @@
   <!-- Header -->
   <header class="header">
     <div class="container header-inner">
-      <div class="brand">
-        <div class="brand-badge"><i data-lucide="bot" class="icon"></i></div>
-        <div>
-          <p style="margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.2em; color: rgba(255,255,255,.7)">SkolarAi</p>
-          <h1 style="margin:0; font-size:18px; font-weight:700;">Robo Club</h1>
-        </div>
-      </div>
-      <nav class="nav">
+        <!-- Brand as one link -->
+        <a href="https://www.skolarai.com/" class="brand brand-link"
+        aria-label="SkolarAi Robo Club — Home">
+        <span class="brand-badge">
+            <i data-lucide="bot" class="icon"></i>
+        </span>
+        <span class="brand-text">
+            <p style="margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.2em; color: rgba(255,255,255,.7)">SkolarAi</p>
+            <h1 style="margin:0; font-size:18px; font-weight:700;">Robo Club</h1>
+        </span>
+        </a>
+
+        <nav class="nav">
         <a href="#eligibility">Eligibility</a>
         <a href="#admission">Admission</a>
         <a href="#syllabus">Syllabus</a>
-      </nav>
-      <button class="btn btn-white" id="applyTop">
+        </nav>
+
+        <button class="btn btn-white" id="applyTop">
         Apply Now <i data-lucide="chevron-right" class="icon"></i>
-      </button>
+        </button>
     </div>
   </header>
+
 
   <!-- Hero -->
   <section class="hero">
@@ -528,7 +546,7 @@
           <div style="display:flex; align-items:center; gap:8px; margin-top:8px;"><i data-lucide="mail" class="icon"></i> <span>admin@skolarai.com</span></div>
         </div>
       </div>
-      <div class="muted2" style="margin-top: 12px; font-size:12px;">© <span id="year"></span> SkolarAi. All rights reserved.</div>
+      <div class="muted2" style="margin-top: 12px; font-size:12px;">© <span id="year"></span> SkolarAi Labs LLP. All rights reserved.</div>
     </div>
   </footer>
 
