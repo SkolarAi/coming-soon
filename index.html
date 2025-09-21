@@ -82,31 +82,31 @@
     .hero p { margin-top: 12px; color: rgba(255,255,255,.8); line-height: 1.6; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
     .hero-bullets{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;          /* allow wrap on smaller widths */
-    margin-top:16px;         /* was 1px -> gives breathing room */
-    font-size:13px;          /* a bit larger for readability */
-    color: rgba(255,255,255,.9);
-    }
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;          /* allow wrap on smaller widths */
+      margin-top:16px;         /* was 1px -> gives breathing room */
+      font-size:13px;          /* a bit larger for readability */
+      color: rgba(255,255,255,.9);
+      }
 
     .hero-bullets .chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:6px 12px;
-    border-radius:999px;
-    border:1px solid var(--ring);
-    background: rgba(255,255,255,.06);
-    backdrop-filter: blur(4px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.18);
-    }
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--ring);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(4px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.18);
+      }
 
     .hero-bullets .chip svg{
-    width:18px; height:18px; 
-    stroke-width:1.75;       /* crisper checkmark */
-    }
+      width:18px; height:18px; 
+      stroke-width:1.75;       /* crisper checkmark */
+      }
 
     /* — Coming Soon Card — */
     .coming-card{
@@ -289,6 +289,46 @@
     /* Inputs */
     input, textarea { width: 100%; color: var(--text); padding: 10px 12px; border-radius: 12px; outline: none; border: 1px solid var(--ring); background: rgba(255,255,255,.05); }
     input:focus, textarea:focus { box-shadow: 0 0 0 2px rgba(217,70,239,.4); border-color: transparent; }
+
+    /* --- Pretty form inputs --- */
+    .input{
+      width:100%;
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--ring);
+      background:rgba(255,255,255,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      transition:border-color .2s, box-shadow .2s, transform .08s;
+    }
+    .input:focus{
+      outline:none;
+      border-color: transparent;
+      box-shadow: 0 0 0 2px rgba(217,70,239,.45);
+    }
+    .input::placeholder{ color: rgba(255,255,255,.55); }
+
+    /* grid helpers for the form */
+    .form-row.two{ display:grid; gap:12px; grid-template-columns: 1fr; }
+    @media (min-width:640px){ .form-row.two{ grid-template-columns: 1fr 1fr; } }
+
+    /* status messages */
+    .form-status{
+      min-height: 22px;            /* reserve space to avoid layout shift */
+      font-size: 14px;
+    }
+    .notice{
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:10px 12px;
+      border-radius:12px;
+    }
+    .notice.success{ border-color: rgba(34,197,94,.4); }
+    .notice.error{ border-color: rgba(239,68,68,.5); }
+
+    /* loading state for button */
+    #applySubmit[disabled]{ opacity:.7; cursor:not-allowed; }
+
 
     /* Modal */
     .modal { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.7); padding: 16px; z-index: 50; }
@@ -558,56 +598,122 @@
         <button id="closeModal" class="muted" style="background:none; border:0; color:inherit; cursor:pointer;">Close</button>
       </div>
       <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill this quick form and we will share the admission test schedule via email.</p>
-      <form id="applyForm" style="margin-top:12px; display:grid; gap:12px;">
-        <div class="grid grid-2">
-          <input placeholder="Student Name" required />
-          <input placeholder="Age (12–15)" type="number" min="12" max="15" required />
+      <form
+        id="applyForm"
+        action="https://formspree.io/f/xzzjpdzv"
+        method="POST"
+        style="margin-top:12px; display:grid; gap:12px;"
+        novalidate
+      >
+        <div class="form-row two">
+          <input class="input" name="studentName" placeholder="Student Name" required />
+          <input class="input" name="age" placeholder="Age (12–15)" type="number" min="12" max="15" required />
         </div>
-        <input placeholder="Parent Email" type="email" required />
-        <input placeholder="Parent Phone" type="tel" required />
-        <textarea placeholder="Tell us about the student's interests" rows="4"></textarea>
-        <button type="submit" class="btn btn-primary" style="justify-content:center;">Submit Application</button>
+
+        <!-- IMPORTANT: Formspree expects name="email" -->
+        <input class="input" name="email" placeholder="Parent Email" type="email" required />
+        <input class="input" name="parentPhone" placeholder="Parent Phone" type="tel" required />
+
+        <!-- Long text should be name="message" for Formspree -->
+        <textarea class="input" name="message" placeholder="Tell us about the student's interests" rows="4"></textarea>
+
+        <input type="hidden" name="form-name" value="Robo Club Application" />
+
+        <div id="applyStatus" class="form-status" aria-live="polite"></div>
+
+        <button id="applySubmit" type="submit" class="btn btn-primary" style="justify-content:center;">
+          Submit Application
+        </button>
       </form>
     </div>
   </div>
 
   <script>
-    // Initialize icons
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide && lucide.createIcons) lucide.createIcons();
-      document.getElementById('year').textContent = new Date().getFullYear();
-    });
+window.addEventListener('DOMContentLoaded', () => {
+  // Icons + year
+  if (window.lucide && lucide.createIcons) lucide.createIcons();
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Modal logic
-    const modal = document.getElementById('applyModal');
-    const openers = [document.getElementById('applyTop'), document.getElementById('applyCta'), document.getElementById('getProspectus')];
-    const closeBtn = document.getElementById('closeModal');
+  // Modal logic
+  const modal   = document.getElementById('applyModal');
+  const openers = [document.getElementById('applyTop'),
+                   document.getElementById('applyCta'),
+                   document.getElementById('getProspectus')];
+  const closeBtn = document.getElementById('closeModal');
 
-    openers.forEach(btn => btn && btn.addEventListener('click', () => {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-    }));
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+  };
 
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-    });
+  openers.forEach(btn => btn && btn.addEventListener('click', () => {
+    if (!modal) return;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }));
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  // AJAX submit with in-panel status + auto-close
+  const form   = document.getElementById('applyForm');
+  const status = document.getElementById('applyStatus');
+  const submit = document.getElementById('applySubmit');
+
+  if (!form) return; // nothing else to do if form missing
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!submit || !status) return form.submit(); // fallback to normal POST
+
+    status.innerHTML = '';
+    submit.disabled = true;
+    const originalLabel = submit.textContent;
+    submit.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        status.innerHTML = `
+          <div class="notice success">
+            ✅ Application submitted! We’ll contact you soon.
+          </div>`;
+        form.reset();
+
+        setTimeout(() => {
+          closeModal();
+          status.innerHTML = '';
+          submit.disabled = false;
+          submit.textContent = originalLabel;
+        }, 1600);
+      } else {
+        const err = await res.json().catch(() => ({}));
+        status.innerHTML = `
+          <div class="notice error">
+            ⚠️ ${err?.errors?.[0]?.message || 'Submission failed. Please try again.'}
+          </div>`;
+        submit.disabled = false;
+        submit.textContent = originalLabel;
       }
-    });
-
-    // Form submission demo
-    document.getElementById('applyForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert("Submitted! We'll be in touch soon.");
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      e.target.reset();
-    });
-  </script>
+    } catch (error) {
+      console.error(error);
+      status.innerHTML = `
+        <div class="notice error">
+          ⚠️ Network error. Please try again later.
+        </div>`;
+      submit.disabled = false;
+      submit.textContent = originalLabel;
+    }
+  });
+});
+</script>
 </body>
 </html>
