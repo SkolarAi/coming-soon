@@ -4,371 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkolarAi Robo Club – Pamphlet</title>
+
+  <!-- Favicon & app icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="icon" href="assets/logo-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/logo-180.png">
+  <meta name="theme-color" content="#0b1220">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
   <!-- Lucide icons (CDN) -->
   <script defer src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    :root {
-      --bg-top: #0b1220; /* slate-950-ish */
-      --bg-mid: #0e1626; /* slate-900-ish */
-      --text: #ffffff;
-      --muted: rgba(255,255,255,.7);
-      --muted2: rgba(255,255,255,.5);
-      --card: rgba(255,255,255,.05);
-      --border: rgba(255,255,255,.1);
-      --ring: rgba(255,255,255,.15);
-      --grad-a: #6366f1; /* indigo-500 */
-      --grad-b: #d946ef; /* fuchsia-500 */
-      --grad-c: #22d3ee; /* cyan-400 */
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: linear-gradient(to bottom, var(--bg-top), var(--bg-mid), var(--bg-top));
-    }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 700; border: 0; cursor: pointer;
-      padding: 10px 16px; border-radius: 14px;
-    }
-    .btn-primary {
-      background: linear-gradient(90deg, var(--grad-a), var(--grad-b), var(--grad-c));
-      color: #0b1220; box-shadow: 0 10px 30px rgba(79,70,229,.3);
-    }
-    .btn-ghost { border: 1px solid var(--border); background: transparent; color: var(--text); }
-    .btn-white { background: #fff; color: #0b1220; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
-
-    /* Header */
-    /* Header */
-    .header{
-      position: sticky; top: 0; z-index: 40;
-      backdrop-filter: blur(8px);
-      background: rgba(11,18,32,.5);
-      border-bottom: 1px solid var(--border);
-    }
-    .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
-    .brand{ display:flex; align-items:center; gap:12px; }
-
-    /* Brand as link */
-    .brand-link{
-      display:flex; align-items:center; gap:12px;
-      text-decoration:none; color:inherit;
-    }
-    .brand-link:focus-visible{ outline:2px solid rgba(217,70,239,.6); outline-offset:4px; border-radius:10px; }
-
-    /* Bigger, crisp logo with baseline alignment */
-    .brand-logo{
-      height:36px;             /* try 30–36px depending on your asset */
-      width:auto;
-      display:block;
-      margin-top:4px;          /* optical alignment tweak */
-    }
-
-    /* Wordmark */
-    .brand-wordmark{ display:flex; flex-direction:column; line-height:1.1; }
-    .brand-line-1{
-      font-size:12px; letter-spacing:.2em; text-transform:uppercase;
-      color: rgba(255,255,255,.75);
-    }
-    .brand-line-2{
-      font-size:20px; font-weight:800;
-      /* subtle gradient ink for the title */
-      background: linear-gradient(90deg, #ffffff, #dbeafe);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    @media (min-width:1024px){
-      .brand-logo{ height:34px; }
-      .brand-line-2{ font-size:22px; }
-    }
-
-    /* Nav */
-    .nav{ display:none; gap:24px; color:rgba(255,255,255,.8); }
-    @media (min-width:768px){ .nav{ display:flex; } }
-    .nav a:hover{ color:#fff; }
-
-
-    /* Hero */
-    .hero { position: relative; overflow: hidden; }
-    .blob-a, .blob-b { position: absolute; filter: blur(48px); opacity: .4; }
-    .blob-a { top: -120px; right: -120px; width: 18rem; height: 18rem; background: var(--grad-b); border-radius: 999px; }
-    .blob-b { bottom: -120px; left: -120px; width: 18rem; height: 18rem; background: var(--grad-c); border-radius: 999px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--ring); background: rgba(255,255,255,.05); color: rgba(255,255,255,.8); }
-    .hero h2 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 56px); line-height: 1.1; font-weight: 800; }
-    .gradient-text { background: linear-gradient(90deg, #a5b4fc, #f0abfc, #67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
-    .hero p { margin-top: 12px; color: rgba(255,255,255,.8); line-height: 1.6; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-    .hero-bullets{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;          /* allow wrap on smaller widths */
-      margin-top:16px;         /* was 1px -> gives breathing room */
-      font-size:13px;          /* a bit larger for readability */
-      color: rgba(255,255,255,.9);
-      }
-
-    .hero-bullets .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--ring);
-      background: rgba(255,255,255,.06);
-      backdrop-filter: blur(4px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.18);
-      }
-
-    .hero-bullets .chip svg{
-      width:18px; height:18px; 
-      stroke-width:1.75;       /* crisper checkmark */
-      }
-
-    /* — Coming Soon Card — */
-    .coming-card{
-    position: relative;
-    border-radius: 28px;
-    padding: 28px 24px;
-    text-align: center;
-    color: var(--text);
-    background:
-        radial-gradient(120% 100% at 10% 0%, rgba(217,70,239,.12) 0%, rgba(79,70,229,.06) 40%, transparent 70%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-    border: 1px solid rgba(255,255,255,.14);
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.08);
-    backdrop-filter: blur(10px);
-    isolation: isolate;                 /* keeps shine inside */
-    overflow: hidden;                    /* clip effects */
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    animation: cardFloat 6s ease-in-out infinite;
-    }
-    .coming-card:hover{
-    transform: translateY(-3px);
-    border-color: rgba(255,255,255,.22);
-    box-shadow: 0 16px 60px rgba(0,0,0,.45);
-    }
-
-    /* Gradient border sheen */
-    .coming-card::before{
-    content: "";
-    position: absolute; inset: 0; border-radius: 28px;
-    padding: 1px;                          /* border thickness */
-    background: conic-gradient(
-        from 180deg,
-        rgba(99,102,241,.55),
-        rgba(217,70,239,.55),
-        rgba(34,211,238,.55),
-        rgba(99,102,241,.55)
-    );
-    -webkit-mask: 
-        linear-gradient(#000 0 0) content-box, 
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: .45;
-    pointer-events: none;
-    }
-
-    /* Soft glow orb */
-    .coming-card::after{
-    content:"";
-    position:absolute; width:280px; height:280px; right:-120px; top:-140px;
-    background: radial-gradient(closest-side, rgba(217,70,239,.28), transparent 70%);
-    filter: blur(18px);
-    z-index: -1;
-    }
-
-    /* Title */
-    .coming-card h3{
-    margin: 0 0 10px;
-    font-size: clamp(22px, 3.2vw, 30px);
-    font-weight: 800;
-    letter-spacing:.2px;
-    }
-
-    /* City badge (optional) */
-    .coming-badge{
-    display:inline-flex; align-items:center; gap:8px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 12px; font-weight:700;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.16);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-    margin-bottom: 10px;
-    }
-
-    /* Subtext */
-    .coming-card p{
-    margin: 10px 0 0;
-    color: var(--muted);
-    line-height: 1.6;
-    }
-
-    /* CTA chip (optional) */
-    .coming-chip{
-    display:inline-flex; align-items:center; gap:8px;
-    margin-top:14px;
-    padding:8px 12px; border-radius:999px;
-    border:1px solid var(--ring);
-    background: rgba(255,255,255,.06);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-    font-size: 12px; font-weight:600;
-    }
-
-    /* Shine sweep on hover */
-    .coming-card:hover .shine{ opacity:.9; transform: translateX(120%); }
-    .shine{
-    position:absolute; top:0; left:-120%;
-    width:40%; height:100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.20), transparent);
-    filter: blur(10px);
-    transform: translateX(0);
-    transition: transform .8s ease, opacity .8s ease;
-    opacity:.0;
-    pointer-events:none;
-    }
-
-    /* Motion */
-    @keyframes cardFloat{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-4px); }
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-    .coming-card, .coming-card:hover{ animation:none; transform:none; }
-    .shine{ transition:none; }
-    }
-
-    /* Sections */
-    section { padding: 48px 0; }
-    .card { border: 1px solid var(--border); background: var(--card); border-radius: 24px; padding: 24px; }
-
-    /* Grid helpers */
-    .grid { display: grid; gap: 24px; }
-    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1280px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
-
-    /* Timeline */
-    .timeline { position: relative; border-left: 1px solid var(--border); margin-left: 1rem; }
-    .timeline-item { position: relative; margin: 0 0 24px 0; padding-left: 24px; }
-    .timeline-index {
-      position: absolute; left: -14px; top: 0; width: 24px; height: 24px; display: grid; place-items: center;
-      background: #fff; color: #0b1220; border-radius: 999px; box-shadow: 0 0 0 8px rgba(2,6,23,.6);
-    }
-
-    /* Admission timeline */
-    #admission .timeline{
-    list-style:none;          /* hide default 1., 2., 3. */
-    padding-left:0;
-    margin-left:1rem;
-    border-left:1px solid var(--border);
-    counter-reset: step;      /* CSS counter for circles */
-    }
-    #admission .timeline-item{
-    position:relative;
-    margin:0 0 28px;
-    padding-left:28px;        /* space for the circle */
-    }
-    #admission .timeline-index{
-    position:absolute; left:-14px; top:0;
-    width:28px; height:28px; display:grid; place-items:center;
-    background:#fff; color:#0b1220; border-radius:999px;
-    font-weight:700;
-    box-shadow: 0 0 0 8px rgba(2,6,23,.6), 0 2px 8px rgba(0,0,0,.2);
-    }
-    #admission .timeline-index::before{
-    counter-increment: step;
-    content: counter(step);   /* auto 1,2,3… */
-    }
-
-    /* Nicer step cards */
-    .card.card--step{
-    border:1px solid rgba(255,255,255,.12);
-    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    border-radius:24px;
-    padding:20px 22px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-    }
-    .card.card--step:hover{ border-color: rgba(255,255,255,.2); transform: translateY(-1px); transition: all .2s; }
-
-    /* CTA banner */
-    .cta { background: linear-gradient(90deg, rgba(79,70,229,.6), rgba(217,70,239,.6), rgba(34,211,238,.6)); border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
-
-    /* Footer */
-    footer { border-top: 1px solid var(--border); }
-    .footer-grid { display: grid; gap: 24px; }
-    @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    /* Inputs */
-    input, textarea { width: 100%; color: var(--text); padding: 10px 12px; border-radius: 12px; outline: none; border: 1px solid var(--ring); background: rgba(255,255,255,.05); }
-    input:focus, textarea:focus { box-shadow: 0 0 0 2px rgba(217,70,239,.4); border-color: transparent; }
-
-    /* --- Pretty form inputs --- */
-    .input{
-      width:100%;
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--ring);
-      background:rgba(255,255,255,.06);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      transition:border-color .2s, box-shadow .2s, transform .08s;
-    }
-    .input:focus{
-      outline:none;
-      border-color: transparent;
-      box-shadow: 0 0 0 2px rgba(217,70,239,.45);
-    }
-    .input::placeholder{ color: rgba(255,255,255,.55); }
-
-    /* grid helpers for the form */
-    .form-row.two{ display:grid; gap:12px; grid-template-columns: 1fr; }
-    @media (min-width:640px){ .form-row.two{ grid-template-columns: 1fr 1fr; } }
-
-    /* status messages */
-    .form-status{
-      min-height: 22px;            /* reserve space to avoid layout shift */
-      font-size: 14px;
-    }
-    .notice{
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      padding:10px 12px;
-      border-radius:12px;
-    }
-    .notice.success{ border-color: rgba(34,197,94,.4); }
-    .notice.error{ border-color: rgba(239,68,68,.5); }
-
-    /* loading state for button */
-    #applySubmit[disabled]{ opacity:.7; cursor:not-allowed; }
-
-
-    /* Modal */
-    .modal { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.7); padding: 16px; z-index: 50; }
-    .modal.open { display: grid; }
-    .modal-card { width: 100%; max-width: 640px; background: #0b1220; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 20px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
-
-    /* Utilities */
-    .muted { color: var(--muted); }
-    .muted2 { color: var(--muted2); }
-    .title { font-size: 28px; font-weight: 800; }
-    .subtitle { text-transform: uppercase; letter-spacing: .2em; font-size: 12px; color: rgba(255,255,255,.6); display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-    .center { text-align: center; }
-    .icon { width: 20px; height: 20px; }
-    .icon-lg { width: 24px; height: 24px; }
-  </style>
-  <!-- Favicon & app icons -->
-  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
-  <link rel="icon" href="/assets/logo-32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/logo-180.png">
-  <meta name="theme-color" content="#0b1220">
+  <!-- App JS -->
+  <script defer src="app.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -382,6 +31,7 @@
           <span class="brand-line-2">Robo Club</span>
         </span>
       </a>
+
       <nav class="nav">
         <a href="#eligibility">Eligibility</a>
         <a href="#admission">Admission</a>
@@ -398,14 +48,14 @@
   <section class="hero">
     <div class="blob-a"></div>
     <div class="blob-b"></div>
-    <div class="container" style="padding:64px 0 72px;">
-      <div class="grid grid-2" style="align-items:center;">
+    <div class="container hero-container">
+      <div class="grid grid-2 align-center">
         <div>
           <span class="eyebrow"><i data-lucide="sparkles" class="icon"></i> Admissions Open</span>
           <h2>Build. Learn. Ship.
             <span class="gradient-text">Your first robot with AI.</span>
           </h2>
-          <p>A premium after‑school club for high‑potential students (ages 10–14) to learn Python, Machine Learning, and Robotics—culminating in a real project showcase.</p>
+          <p>A premium after-school club for high-potential students (ages 10–14) to learn Python, Machine Learning, and Robotics—culminating in a real project showcase.</p>
           <div class="hero-cta">
             <button class="btn btn-primary" id="getProspectus">Get Prospectus</button>
             <a class="btn btn-ghost" href="#syllabus">View Syllabus</a>
@@ -416,26 +66,17 @@
             <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Parent showcase</span>
           </div>
         </div>
-        <!-- ✅ NEW RIGHT CARD -->
+
+        <!-- Right card -->
         <div class="coming-card">
-            <span class="shine" aria-hidden="true"></span>
-
-            <div class="coming-badge">
-                <i data-lucide="map-pin" class="icon"></i> New City
-            </div>
-
-            <h3>
-                Coming soon in <span class="gradient-text">Lucknow</span>
-            </h3>
-
-            <p class="muted">
-                We’re coming to the city of nawabs! Join the waitlist for early-bird admissions and launch dates.
-            </p>
-
-            <div class="coming-chip">
-                <i data-lucide="clock" class="icon"></i> Waitlist opens soon
-            </div>
-    </div>
+          <span class="shine" aria-hidden="true"></span>
+          <div class="coming-badge">
+            <i data-lucide="map-pin" class="icon"></i> New City
+          </div>
+          <h3>Coming soon in <span class="gradient-text">Lucknow</span></h3>
+          <p class="muted">We’re coming to the city of nawabs! Join the waitlist for early-bird admissions and launch dates.</p>
+          <div class="coming-chip"><i data-lucide="clock" class="icon"></i> Waitlist opens soon</div>
+        </div>
       </div>
     </div>
   </section>
@@ -445,18 +86,18 @@
     <div class="container">
       <div class="card">
         <h3 class="title">Eligibility</h3>
-        <div class="grid grid-3" style="margin-top: 16px;">
-          <div class="card center" style="transition: transform .2s;">
+        <div class="grid grid-3 mt-16">
+          <div class="card center">
             <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p style="margin:8px 0 0;">12–15 years old</p>
+            <p class="mt-8">12–15 years old</p>
           </div>
-          <div class="card center" style="transition: transform .2s;">
+          <div class="card center">
             <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p style="margin:8px 0 0;">Good academic record</p>
+            <p class="mt-8">Good academic record</p>
           </div>
-          <div class="card center" style="transition: transform .2s;">
+          <div class="card center">
             <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p style="margin:8px 0 0;">Bring your own laptop (RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB recommended)</p>
+            <p class="mt-8">Bring your own laptop (RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB recommended)</p>
           </div>
         </div>
       </div>
@@ -469,38 +110,38 @@
       <div class="subtitle"><i data-lucide="notebook-pen" class="icon"></i> Admission Process</div>
       <ol class="timeline">
         <li class="timeline-item">
-            <span class="timeline-index" aria-hidden="true"></span>
-            <div class="card card--step">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <i data-lucide="notebook-pen" class="icon"></i>
-                <h4 style="margin:0; font-size:18px; font-weight:700;">Registration Form</h4>
+          <span class="timeline-index" aria-hidden="true"></span>
+          <div class="card card--step">
+            <div class="row">
+              <i data-lucide="notebook-pen" class="icon"></i>
+              <h4 class="h4">Registration Form</h4>
             </div>
-            <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill out the online application with guardian details.</p>
-            </div>
+            <p class="muted small">Fill out the online application with guardian details.</p>
+          </div>
         </li>
 
         <li class="timeline-item">
-            <span class="timeline-index" aria-hidden="true"></span>
-            <div class="card card--step">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <i data-lucide="flask-conical" class="icon"></i>
-                <h4 style="margin:0; font-size:18px; font-weight:700;">Math Admission Test (1 hr)</h4>
+          <span class="timeline-index" aria-hidden="true"></span>
+          <div class="card card--step">
+            <div class="row">
+              <i data-lucide="flask-conical" class="icon"></i>
+              <h4 class="h4">Math Admission Test (1 hr)</h4>
             </div>
-            <p class="muted" style="margin:8px 0 0; font-size:14px;">Objective test to gauge fundamentals & curiosity.</p>
-            </div>
+            <p class="muted small">Objective test to gauge fundamentals & curiosity.</p>
+          </div>
         </li>
 
         <li class="timeline-item">
-            <span class="timeline-index" aria-hidden="true"></span>
-            <div class="card card--step">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <i data-lucide="brain-circuit" class="icon"></i>
-                <h4 style="margin:0; font-size:18px; font-weight:700;">Cognitive Personality Test</h4>
+          <span class="timeline-index" aria-hidden="true"></span>
+          <div class="card card--step">
+            <div class="row">
+              <i data-lucide="brain-circuit" class="icon"></i>
+              <h4 class="h4">Cognitive Personality Test</h4>
             </div>
-            <p class="muted" style="margin:8px 0 0; font-size:14px;">A short assessment to understand learning style.</p>
-            </div>
+            <p class="muted small">A short assessment to understand learning style.</p>
+          </div>
         </li>
-        </ol>
+      </ol>
     </div>
   </section>
 
@@ -510,55 +151,58 @@
       <div class="subtitle"><i data-lucide="brain-circuit" class="icon"></i> Syllabus Overview</div>
       <div class="grid grid-4">
         <article class="card">
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="row">
             <i data-lucide="cpu" class="icon-lg"></i>
-            <h4 style="margin:0; font-size:18px; font-weight:700;">Basic Python</h4>
+            <h4 class="h4">Basic Python</h4>
           </div>
-          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Variables</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Data types</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Loops</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Functions</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Hands‑on labs</li>
+          <ul class="list">
+            <li><i data-lucide="check-circle-2" class="icon"></i> Variables</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Data types</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Loops</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Functions</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Hands-on labs</li>
           </ul>
-          <p class="muted2" style="margin-top:12px; font-size:12px;">Foundation for thinking like a programmer.</p>
+          <p class="muted2 small mt-12">Foundation for thinking like a programmer.</p>
         </article>
+
         <article class="card">
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="row">
             <i data-lucide="graduation-cap" class="icon-lg"></i>
-            <h4 style="margin:0; font-size:18px; font-weight:700;">Basic ML</h4>
+            <h4 class="h4">Basic ML</h4>
           </div>
-          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Intro to ML</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Linear Regression (2 projects)</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Logistic Regression (2 projects)</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Concepts over depth</li>
+          <ul class="list">
+            <li><i data-lucide="check-circle-2" class="icon"></i> Intro to ML</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Linear Regression (2 projects)</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Logistic Regression (2 projects)</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Concepts over depth</li>
           </ul>
-          <p class="muted2" style="margin-top:12px; font-size:12px;">We introduce ML gently—no heavy math required.</p>
+          <p class="muted2 small mt-12">We introduce ML gently—no heavy math required.</p>
         </article>
+
         <article class="card">
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="row">
             <i data-lucide="bot" class="icon-lg"></i>
-            <h4 style="margin:0; font-size:18px; font-weight:700;">Basics of Robotics</h4>
+            <h4 class="h4">Basics of Robotics</h4>
           </div>
-          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Sensors & actuators</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Control basics</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Safety & ethics</li>
+          <ul class="list">
+            <li><i data-lucide="check-circle-2" class="icon"></i> Sensors & actuators</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Control basics</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Safety & ethics</li>
           </ul>
-          <p class="muted2" style="margin-top:12px; font-size:12px;">Build confidence with real hardware.</p>
+          <p class="muted2 small mt-12">Build confidence with real hardware.</p>
         </article>
+
         <article class="card">
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="row">
             <i data-lucide="sparkles" class="icon-lg"></i>
-            <h4 style="margin:0; font-size:18px; font-weight:700;">Final Robotics Project</h4>
+            <h4 class="h4">Final Robotics Project</h4>
           </div>
-          <ul style="margin:12px 0 0; padding-left: 0; list-style: none; font-size: 14px;">
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Team build</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Demo day</li>
-            <li style="display:flex; gap:8px; align-items:flex-start;"><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</li>
+          <ul class="list">
+            <li><i data-lucide="check-circle-2" class="icon"></i> Team build</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Demo day</li>
+            <li><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</li>
           </ul>
-          <p class="muted2" style="margin-top:12px; font-size:12px;">Ship a working robot by the end!</p>
+          <p class="muted2 small mt-12">Ship a working robot by the end!</p>
         </article>
       </div>
     </div>
@@ -568,12 +212,12 @@
   <section>
     <div class="container">
       <div class="cta">
-        <div class="grid grid-2" style="align-items:center;">
+        <div class="grid grid-2 align-center">
           <div>
             <h3 class="title">Ready to join SkolarAi Robo Club?</h3>
-            <p class="muted" style="margin-top: 8px;">Seats are limited. Apply today and we’ll email the test schedule and next steps.</p>
+            <p class="muted mt-8">Seats are limited. Apply today and we’ll email the test schedule and next steps.</p>
           </div>
-          <div style="display:flex; justify-content:flex-end;">
+          <div class="right">
             <button class="btn btn-white" id="applyCta">Apply in 2 minutes</button>
           </div>
         </div>
@@ -583,46 +227,47 @@
 
   <!-- Footer -->
   <footer>
-    <div class="container" style="padding: 24px 0;">
+    <div class="container py-24">
       <div class="footer-grid">
         <div>
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="row">
             <i data-lucide="bot" class="icon"></i>
-            <span style="font-weight:700;">SkolarAi Robo Club</span>
+            <span class="fw-700">SkolarAi Robo Club</span>
           </div>
-          <p class="muted2" style="margin-top:8px;">Nurturing young builders with code, curiosity, and robots.</p>
+          <p class="muted2 mt-8">Nurturing young builders with code, curiosity, and robots.</p>
         </div>
         <div>
-          <p style="font-weight:700; margin:0 0 8px 0;">Quick Links</p>
-          <ul style="margin:0; padding-left: 18px;">
+          <p class="fw-700 mb-8">Quick Links</p>
+          <ul class="ul">
             <li><a href="#eligibility">Eligibility</a></li>
             <li><a href="#admission">Admission Process</a></li>
             <li><a href="#syllabus">Syllabus</a></li>
           </ul>
         </div>
         <div>
-          <p style="font-weight:700; margin:0 0 8px 0;">Contact</p>
-          <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="phone" class="icon"></i> <span>+91‑8005345047</span></div>
-          <div style="display:flex; align-items:center; gap:8px; margin-top:8px;"><i data-lucide="mail" class="icon"></i> <span>admin@skolarai.com</span></div>
+          <p class="fw-700 mb-8">Contact</p>
+          <div class="row"><i data-lucide="phone" class="icon"></i> <span>+91-8005345047</span></div>
+          <div class="row mt-8"><i data-lucide="mail" class="icon"></i> <span>admin@skolarai.com</span></div>
         </div>
       </div>
-      <div class="muted2" style="margin-top: 12px; font-size:12px;">© <span id="year"></span> SkolarAi Labs LLP. All rights reserved.</div>
+      <div class="muted2 small mt-12">© <span id="year"></span> SkolarAi Labs LLP. All rights reserved.</div>
     </div>
   </footer>
 
   <!-- Modal -->
   <div class="modal" id="applyModal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <div style="display:flex; align-items:center; justify-content:space-between;">
-        <h4 style="margin:0; font-size:18px; font-weight:700;">Apply to Robo Club</h4>
-        <button id="closeModal" class="muted" style="background:none; border:0; color:inherit; cursor:pointer;">Close</button>
+      <div class="row-between">
+        <h4 class="h4">Apply to Robo Club</h4>
+        <button id="closeModal" class="muted btn-reset">Close</button>
       </div>
-      <p class="muted" style="margin:8px 0 0; font-size:14px;">Fill this quick form and we will share the admission test schedule via email.</p>
+      <p class="muted small mt-8">Fill this quick form and we will share the admission test schedule via email.</p>
+
       <form
         id="applyForm"
         action="https://formspree.io/f/xzzjpdzv"
         method="POST"
-        style="margin-top:12px; display:grid; gap:12px;"
+        class="form"
         novalidate
       >
         <div class="form-row two">
@@ -630,110 +275,19 @@
           <input class="input" name="age" placeholder="Age (10–14)" type="number" min="10" max="15" required />
         </div>
 
-        <!-- IMPORTANT: Formspree expects name="email" -->
         <input class="input" name="email" placeholder="Parent Email" type="email" required />
         <input class="input" name="parentPhone" placeholder="Parent Phone" type="tel" required />
 
-        <!-- Long text should be name="message" for Formspree -->
         <textarea class="input" name="message" placeholder="Tell us about the student's interests" rows="4"></textarea>
 
         <input type="hidden" name="form-name" value="Robo Club Application" />
-
         <div id="applyStatus" class="form-status" aria-live="polite"></div>
 
-        <button id="applySubmit" type="submit" class="btn btn-primary" style="justify-content:center;">
+        <button id="applySubmit" type="submit" class="btn btn-primary center">
           Submit Application
         </button>
       </form>
     </div>
   </div>
-
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      // Icons + year
-      if (window.lucide && lucide.createIcons) lucide.createIcons();
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // Modal logic
-      const modal   = document.getElementById('applyModal');
-      const openers = [document.getElementById('applyTop'),
-                      document.getElementById('applyCta'),
-                      document.getElementById('getProspectus')];
-      const closeBtn = document.getElementById('closeModal');
-
-      const closeModal = () => {
-        if (!modal) return;
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden','true');
-      };
-
-      openers.forEach(btn => btn && btn.addEventListener('click', () => {
-        if (!modal) return;
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden','false');
-      }));
-
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-
-      // AJAX submit with in-panel status + auto-close
-      const form   = document.getElementById('applyForm');
-      const status = document.getElementById('applyStatus');
-      const submit = document.getElementById('applySubmit');
-
-      if (!form) return; // nothing else to do if form missing
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (!submit || !status) return form.submit(); // fallback to normal POST
-
-        status.innerHTML = '';
-        submit.disabled = true;
-        const originalLabel = submit.textContent;
-        submit.textContent = 'Sending…';
-
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (res.ok) {
-            status.innerHTML = `
-              <div class="notice success">
-                ✅ Application submitted! We’ll contact you soon.
-              </div>`;
-            form.reset();
-
-            setTimeout(() => {
-              closeModal();
-              status.innerHTML = '';
-              submit.disabled = false;
-              submit.textContent = originalLabel;
-            }, 1600);
-          } else {
-            const err = await res.json().catch(() => ({}));
-            status.innerHTML = `
-              <div class="notice error">
-                ⚠️ ${err?.errors?.[0]?.message || 'Submission failed. Please try again.'}
-              </div>`;
-            submit.disabled = false;
-            submit.textContent = originalLabel;
-          }
-        } catch (error) {
-          console.error(error);
-          status.innerHTML = `
-            <div class="notice error">
-              ⚠️ Network error. Please try again later.
-            </div>`;
-          submit.disabled = false;
-          submit.textContent = originalLabel;
-        }
-      });
-    });
-  </script>
 </body>
 </html>
