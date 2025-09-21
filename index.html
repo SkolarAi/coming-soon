@@ -43,33 +43,53 @@
     .btn-white { background: #fff; color: #0b1220; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
 
     /* Header */
-    .header {
+    /* Header */
+    .header{
       position: sticky; top: 0; z-index: 40;
       backdrop-filter: blur(8px);
       background: rgba(11,18,32,.5);
       border-bottom: 1px solid var(--border);
     }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-badge {
-      width: 36px; height: 36px; display: grid; place-items: center; border-radius: 14px;
-      background: linear-gradient(135deg, var(--grad-a), var(--grad-b), var(--grad-c));
-      box-shadow: 0 10px 24px rgba(217,70,239,.2);
-    }
-    .nav { display: none; gap: 24px; color: rgba(255,255,255,.8); }
-    @media (min-width: 768px) { .nav { display: flex; } }
-    .nav a:hover { color: #fff; }
+    .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .brand{ display:flex; align-items:center; gap:12px; }
 
+    /* Brand as link */
     .brand-link{
-    display:flex; align-items:center; gap:12px;
-    text-decoration:none; color:inherit;
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color:inherit;
     }
-    .brand-link:focus-visible{
-    outline: 2px solid rgba(217,70,239,.6); outline-offset: 4px;
-    border-radius: 14px;
+    .brand-link:focus-visible{ outline:2px solid rgba(217,70,239,.6); outline-offset:4px; border-radius:10px; }
+
+    /* Bigger, crisp logo with baseline alignment */
+    .brand-logo{
+      height:36px;             /* try 30–36px depending on your asset */
+      width:auto;
+      display:block;
+      margin-top:4px;          /* optical alignment tweak */
     }
-    .brand-link:hover .brand-badge{ transform: translateY(-1px) scale(1.02); }
-    .brand-badge{ transition: transform .18s ease; }
+
+    /* Wordmark */
+    .brand-wordmark{ display:flex; flex-direction:column; line-height:1.1; }
+    .brand-line-1{
+      font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+      color: rgba(255,255,255,.75);
+    }
+    .brand-line-2{
+      font-size:20px; font-weight:800;
+      /* subtle gradient ink for the title */
+      background: linear-gradient(90deg, #ffffff, #dbeafe);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    @media (min-width:1024px){
+      .brand-logo{ height:34px; }
+      .brand-line-2{ font-size:22px; }
+    }
+
+    /* Nav */
+    .nav{ display:none; gap:24px; color:rgba(255,255,255,.8); }
+    @media (min-width:768px){ .nav{ display:flex; } }
+    .nav a:hover{ color:#fff; }
+
 
     /* Hero */
     .hero { position: relative; overflow: hidden; }
@@ -344,35 +364,35 @@
     .icon { width: 20px; height: 20px; }
     .icon-lg { width: 24px; height: 24px; }
   </style>
+  <!-- Favicon & app icons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="icon" href="/assets/logo-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta name="theme-color" content="#0b1220">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container header-inner">
-        <!-- Brand as one link -->
-        <a href="https://www.skolarai.com/" class="brand brand-link"
-        aria-label="SkolarAi Robo Club — Home">
-        <span class="brand-badge">
-            <i data-lucide="bot" class="icon"></i>
+      <!-- Brand as one link -->
+      <a href="https://www.skolarai.com/" class="brand brand-link" aria-label="SkolarAi Robo Club — Home">
+        <img class="brand-logo" src="assets/logo.svg" alt="SkolarAi Logo">
+        <span class="brand-wordmark">
+          <span class="brand-line-1">SkolarAi</span>
+          <span class="brand-line-2">Robo Club</span>
         </span>
-        <span class="brand-text">
-            <p style="margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.2em; color: rgba(255,255,255,.7)">SkolarAi</p>
-            <h1 style="margin:0; font-size:18px; font-weight:700;">Robo Club</h1>
-        </span>
-        </a>
-
-        <nav class="nav">
+      </a>
+      <nav class="nav">
         <a href="#eligibility">Eligibility</a>
         <a href="#admission">Admission</a>
         <a href="#syllabus">Syllabus</a>
-        </nav>
+      </nav>
 
-        <button class="btn btn-white" id="applyTop">
+      <button class="btn btn-white" id="applyTop">
         Apply Now <i data-lucide="chevron-right" class="icon"></i>
-        </button>
+      </button>
     </div>
   </header>
-
 
   <!-- Hero -->
   <section class="hero">
