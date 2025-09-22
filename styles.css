@@ -192,13 +192,64 @@ input:focus, textarea:focus { box-shadow: 0 0 0 2px rgba(217,70,239,.4); border-
 .notice.success{ border-color: rgba(34,197,94,.4); }
 .notice.error{ border-color: rgba(239,68,68,.5); }
 
-/* loading state for button */
-#applySubmit[disabled]{ opacity:.7; cursor:not-allowed; }
-
 /* Modal */
 .modal { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.7); padding: 16px; z-index: 50; }
 .modal.open { display: grid; }
-.modal-card { width: 100%; max-width: 640px; background: #0b1220; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 20px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+/* === Modal Form Fixes === */
+.modal-card {
+  padding: 32px 28px;
+  border-radius: 20px;
+  background: #111827;        /* slightly lighter than full black */
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+}
+
+#applyForm {
+  display: grid;
+  gap: 16px;                   /* more breathing room between inputs */
+}
+
+#applyForm .form-row.two {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all .2s ease;
+}
+
+.input:focus {
+  background: rgba(255,255,255,0.12);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.5);
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+}
+
+/* Submit button with full-width & gradient */
+#applySubmit {
+  width: 100%;
+  justify-content: center;
+  background: linear-gradient(90deg,#6366f1,#d946ef,#22d3ee);
+  color: #0b1220;
+  font-weight: 700;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 16px;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.35);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+#applySubmit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.45);
+}
 
 /* Icons */
 .icon { width: 20px; height: 20px; }
