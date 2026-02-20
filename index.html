@@ -1,337 +1,511 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkolarAI Robo Club — AI & Robotics for Kids (12–15)</title>
-  <meta name="description" content="SkolarAI Robo Club — live interactive online classes for students (ages 10–14). Learn Python, Machine Learning, and Robotics from expert mentors — join sessions from anywhere." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkolarAI Robo Club — AI & Robotics for Kids (12–15)</title>
+    <meta
+      name="description"
+      content="SkolarAI Robo Club — live interactive online classes for students (ages 10–14). Learn Python, Machine Learning, and Robotics from expert mentors — join sessions from anywhere."
+    />
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://www.skolarai.com/" />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.skolarai.com/" />
 
-  <!-- Favicon & app icons (PNG/ICO — preferred by Google). Keep these at the site root if possible -->
-  <link rel="icon" href="assets/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="assets/favicon-192.png" sizes="192x192">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#0b1220">
+    <!-- Favicon & app icons (PNG/ICO — preferred by Google). Keep these at the site root if possible -->
+    <link rel="icon" href="assets/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/favicon-32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/favicon-192.png"
+      sizes="192x192"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0b1220" />
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="SkolarAI Robo Club — AI & Robotics for Kids" />
-  <meta property="og:description" content="Live online classes available now — join interactive sessions to learn Python, ML and Robotics from anywhere." />
-  <meta property="og:url" content="https://www.skolarai.com/" />
-  <meta property="og:image" content="https://www.skolarai.com/og-cover.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+    <!-- Open Graph / Twitter -->
+    <meta
+      property="og:title"
+      content="SkolarAI Robo Club — AI & Robotics for Kids"
+    />
+    <meta
+      property="og:description"
+      content="Live online classes available now — join interactive sessions to learn Python, ML and Robotics from anywhere."
+    />
+    <meta property="og:url" content="https://www.skolarai.com/" />
+    <meta property="og:image" content="https://www.skolarai.com/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Organization + Logo -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"SkolarAI",
-    "url":"https://www.skolarai.com/",
-    "logo":"https://www.skolarai.com/logo-512.png",
-    "sameAs":[
-      "https://www.linkedin.com/company/skolarai"
-    ],
-    "contactPoint":[{"@type":"ContactPoint","contactType":"admissions","email":"admin@skolarai.com"}]
-  }
-  </script>
+    <!-- Organization + Logo -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SkolarAI",
+        "url": "https://www.skolarai.com/",
+        "logo": "https://www.skolarai.com/logo-512.png",
+        "sameAs": ["https://www.linkedin.com/company/skolarai"],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "admissions",
+            "email": "admin@skolarai.com"
+          }
+        ]
+      }
+    </script>
 
-  <!-- Website (enables sitelinks searchbox eligibility) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "url":"https://www.skolarai.com/",
-    "name":"SkolarAI Robo Club",
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"https://www.skolarai.com/search?q={search_term_string}",
-      "query-input":"required name=search_term_string"
-    }
-  }
-  </script>
+    <!-- Website (enables sitelinks searchbox eligibility) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://www.skolarai.com/",
+        "name": "SkolarAI Robo Club",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.skolarai.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
 
-  <!-- Lucide icons (CDN) -->
-  <script defer src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lucide icons (CDN) -->
+    <script defer src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- App JS -->
-  <script defer src="app.js"></script>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container header-inner">
-      <!-- Brand as one link -->
-      <a href="https://www.skolarai.com/" class="brand brand-link" aria-label="SkolarAi Robo Club — Home">
-        <img class="brand-logo" src="assets/logo.svg" alt="SkolarAi Logo">
-        <span class="brand-wordmark">
-          <span class="brand-line-1">SkolarAi</span>
-          <span class="brand-line-2">Robo Club</span>
-        </span>
-      </a>
+    <!-- App JS -->
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-inner">
+        <!-- Brand as one link -->
+        <a
+          href="https://www.skolarai.com/"
+          class="brand brand-link"
+          aria-label="SkolarAi Robo Club — Home"
+        >
+          <img class="brand-logo" src="assets/logo.svg" alt="SkolarAi Logo" />
+          <span class="brand-wordmark">
+            <span class="brand-line-1">SkolarAi</span>
+            <span class="brand-line-2">Robo Club</span>
+          </span>
+        </a>
 
-      <nav class="nav">
-        <a href="#eligibility">Eligibility</a>
-        <a href="#admission">Admission</a>
-        <a href="#syllabus">Syllabus</a>
-      </nav>
+        <nav class="nav">
+          <a href="#eligibility">Eligibility</a>
+          <a href="#admission">Admission</a>
+          <a href="#syllabus">Syllabus</a>
+        </nav>
 
-      <button class="btn btn-white" id="applyTop">
-        Apply Now <i data-lucide="chevron-right" class="icon"></i>
-      </button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="blob-a"></div>
-    <div class="blob-b"></div>
-    <div class="container hero-container">
-      <div class="grid grid-2 align-center">
-        <div>
-          <span class="eyebrow"><i data-lucide="sparkles" class="icon"></i> Admissions Open</span>
-          <h2>Build. Learn. Ship.
-            <span class="gradient-text">Your first robot with AI.</span>
-          </h2>
-          <p>A premium after-school club for high-potential students (ages 10–14) to learn Python, Machine Learning, and Robotics culminating in a real project showcase.</p>
-          <div class="hero-cta">
-            <button class="btn btn-primary" id="getProspectus">Get Prospectus</button>
-            <a class="btn btn-ghost" href="#syllabus">View Syllabus</a>
-          </div>
-          <div class="hero-bullets" role="list" aria-label="Program highlights">
-            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Mentor-led</span>
-            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Project-based</span>
-            <span class="chip" role="listitem"><i data-lucide="check-circle-2"></i> Parent showcase</span>
-          </div>
-        </div>
-
-        <!-- Right card (updated for Online classes) -->
-        <div class="coming-card">
-          <span class="shine" aria-hidden="true"></span>
-          <div class="coming-badge">
-            <i data-lucide="globe" class="icon"></i> Online
-          </div>
-          <h3>Now offering <span class="gradient-text">Live Online Classes</span></h3>
-          <p class="muted">Join our live, interactive online sessions from anywhere. Expert mentors, small cohorts, hands-on labs enroll now.</p>
-          <div class="coming-chip"><i data-lucide="clock" class="icon"></i> Live batches limited seats</div>
-        </div>
+        <button class="btn btn-white" id="applyTop">
+          Apply Now <i data-lucide="chevron-right" class="icon"></i>
+        </button>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Eligibility -->
-  <section id="eligibility">
-    <div class="container">
-      <div class="card">
-        <h3 class="title">Eligibility</h3>
-        <div class="grid grid-3 mt-16">
-          <div class="card center">
-            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p class="mt-8">10-14 years old</p>
-          </div>
-          <div class="card center">
-            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p class="mt-8">Good academic record</p>
-          </div>
-          <div class="card center">
-            <i data-lucide="check-circle-2" class="icon-lg" style="color:#f0abfc;"></i>
-            <p class="mt-8">Bring your own laptop (RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB recommended)</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Admission Process -->
-  <section id="admission">
-    <div class="container">
-      <div class="subtitle"><i data-lucide="notebook-pen" class="icon"></i> Admission Process</div>
-      <ol class="timeline">
-        <li class="timeline-item">
-          <span class="timeline-index" aria-hidden="true"></span>
-          <div class="card card--step">
-            <div class="row">
-              <i data-lucide="notebook-pen" class="icon"></i>
-              <h4 class="h4">Registration Form</h4>
-            </div>
-            <p class="muted small">Fill out the online application with guardian details.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <span class="timeline-index" aria-hidden="true"></span>
-          <div class="card card--step">
-            <div class="row">
-              <i data-lucide="flask-conical" class="icon"></i>
-              <h4 class="h4">Math Admission Test (1 hr)</h4>
-            </div>
-            <p class="muted small">Objective test to gauge fundamentals & curiosity.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <span class="timeline-index" aria-hidden="true"></span>
-          <div class="card card--step">
-            <div class="row">
-              <i data-lucide="brain-circuit" class="icon"></i>
-              <h4 class="h4">Cognitive Personality Test</h4>
-            </div>
-            <p class="muted small">A short assessment to understand learning style.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Syllabus -->
-  <section id="syllabus">
-    <div class="container">
-      <div class="subtitle"><i data-lucide="brain-circuit" class="icon"></i> Syllabus Overview</div>
-      <div class="grid grid-4">
-        <article class="card">
-          <div class="row">
-            <i data-lucide="cpu" class="icon-lg"></i>
-            <h4 class="h4">Basic Python</h4>
-          </div>
-          <ul class="list">
-            <li><i data-lucide="check-circle-2" class="icon"></i> Variables</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Data types</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Loops</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Functions</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Hands-on labs</li>
-          </ul>
-          <p class="muted2 small mt-12">Foundation for thinking like a programmer.</p>
-        </article>
-
-        <article class="card">
-          <div class="row">
-            <i data-lucide="graduation-cap" class="icon-lg"></i>
-            <h4 class="h4">Basic ML</h4>
-          </div>
-          <ul class="list">
-            <li><i data-lucide="check-circle-2" class="icon"></i> Intro to ML</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Linear Regression (2 projects)</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Logistic Regression (2 projects)</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Concepts over depth</li>
-          </ul>
-          <p class="muted2 small mt-12">We introduce ML gently—no heavy math required.</p>
-        </article>
-
-        <article class="card">
-          <div class="row">
-            <i data-lucide="bot" class="icon-lg"></i>
-            <h4 class="h4">Basics of Robotics</h4>
-          </div>
-          <ul class="list">
-            <li><i data-lucide="check-circle-2" class="icon"></i> Sensors & actuators</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Control basics</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Safety & ethics</li>
-          </ul>
-          <p class="muted2 small mt-12">Build confidence with real hardware.</p>
-        </article>
-
-        <article class="card">
-          <div class="row">
-            <i data-lucide="sparkles" class="icon-lg"></i>
-            <h4 class="h4">Final Robotics Project</h4>
-          </div>
-          <ul class="list">
-            <li><i data-lucide="check-circle-2" class="icon"></i> Team build</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Demo day</li>
-            <li><i data-lucide="check-circle-2" class="icon"></i> Parent showcase</li>
-          </ul>
-          <p class="muted2 small mt-12">Ship a working robot by the end!</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Banner -->
-  <section>
-    <div class="container">
-      <div class="cta">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="blob-a"></div>
+      <div class="blob-b"></div>
+      <div class="container hero-container">
         <div class="grid grid-2 align-center">
           <div>
-            <h3 class="title">Ready to join SkolarAi Robo Club?</h3>
-            <p class="muted mt-8">Seats are limited. Apply today and we’ll email the test schedule and next steps.</p>
+            <span class="eyebrow"
+              ><i data-lucide="sparkles" class="icon"></i> Admissions Open</span
+            >
+            <h2>
+              Build. Learn. Ship.
+              <span class="gradient-text">Your first robot with AI.</span>
+            </h2>
+            <p>
+              A premium after-school club for high-potential students (ages
+              10–14) to learn Python, Machine Learning, and Robotics culminating
+              in a real project showcase.
+            </p>
+            <div class="hero-cta">
+              <button class="btn btn-primary" id="getProspectus">
+                Get Prospectus
+              </button>
+              <a class="btn btn-ghost" href="#syllabus">View Syllabus</a>
+            </div>
+            <div
+              class="hero-bullets"
+              role="list"
+              aria-label="Program highlights"
+            >
+              <span class="chip" role="listitem"
+                ><i data-lucide="check-circle-2"></i> Mentor-led</span
+              >
+              <span class="chip" role="listitem"
+                ><i data-lucide="check-circle-2"></i> Project-based</span
+              >
+              <span class="chip" role="listitem"
+                ><i data-lucide="check-circle-2"></i> Parent showcase</span
+              >
+            </div>
           </div>
-          <div class="right">
-            <button class="btn btn-white" id="applyCta">Apply in 2 minutes</button>
+
+          <!-- Right card (updated for Online classes) -->
+          <div class="coming-card">
+            <span class="shine" aria-hidden="true"></span>
+            <div class="coming-badge">
+              <i data-lucide="globe" class="icon"></i> Online
+            </div>
+            <h3>
+              Now offering
+              <span class="gradient-text">Live Online Classes</span>
+            </h3>
+            <p class="muted">
+              Join our live, interactive online sessions from anywhere. Expert
+              mentors, small cohorts, hands-on labs enroll now.
+            </p>
+            <div class="coming-chip">
+              <i data-lucide="clock" class="icon"></i> Live batches limited
+              seats
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container py-24">
-      <div class="footer-grid">
-        <div>
-          <div class="row">
-            <i data-lucide="bot" class="icon"></i>
-            <span class="fw-700">SkolarAi Robo Club</span>
+    <!-- Eligibility -->
+    <section id="eligibility">
+      <div class="container">
+        <div class="card">
+          <h3 class="title">Eligibility</h3>
+          <div class="grid grid-3 mt-16">
+            <div class="card center">
+              <i
+                data-lucide="check-circle-2"
+                class="icon-lg"
+                style="color: #f0abfc"
+              ></i>
+              <p class="mt-8">10-14 years old</p>
+            </div>
+            <div class="card center">
+              <i
+                data-lucide="check-circle-2"
+                class="icon-lg"
+                style="color: #f0abfc"
+              ></i>
+              <p class="mt-8">Good academic record</p>
+            </div>
+            <div class="card center">
+              <i
+                data-lucide="check-circle-2"
+                class="icon-lg"
+                style="color: #f0abfc"
+              ></i>
+              <p class="mt-8">
+                Bring your own laptop (RAM ≥ 8 GB, SSD ≥ 512 GB, GPU ≥ 4 GB
+                recommended)
+              </p>
+            </div>
           </div>
-          <p class="muted2 mt-8">Nurturing young builders with code, curiosity, and robots.</p>
-        </div>
-        <div>
-          <p class="fw-700 mb-8">Quick Links</p>
-          <ul class="ul">
-            <li><a href="#eligibility">Eligibility</a></li>
-            <li><a href="#admission">Admission Process</a></li>
-            <li><a href="#syllabus">Syllabus</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="fw-700 mb-8">Contact</p>
-          <div class="row"><i data-lucide="phone" class="icon"></i> <span>+91-8005345047</span></div>
-          <div class="row mt-8"><i data-lucide="mail" class="icon"></i> <span>admin@skolarai.com</span></div>
         </div>
       </div>
-      <div class="muted2 small mt-12">© <span id="year"></span> SkolarAi Labs LLP. All rights reserved.</div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- Modal -->
-  <div class="modal" id="applyModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <div class="row-between">
-        <h4 class="h4" style="margin-bottom:4px;">Apply to Robo Club</h4>
-        <button id="closeModal" class="muted btn-reset">Close</button>
-      </div>
-      <p class="muted small mt-8">Fill this quick form and we will share the admission test schedule via email.</p>
-
-      <form
-        id="applyForm"
-        action="https://formspree.io/f/xzzjpdzv"
-        method="POST"
-        class="form"
-        novalidate
-      >
-        <div class="form-row two">
-          <input class="input" name="studentName" placeholder="Student Name" required />
-          <input class="input" name="age" placeholder="Age (10–14)" type="number" min="10" max="15" required />
+    <!-- Admission Process -->
+    <section id="admission">
+      <div class="container">
+        <div class="subtitle">
+          <i data-lucide="notebook-pen" class="icon"></i> Admission Process
         </div>
+        <ol class="timeline">
+          <li class="timeline-item">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
+              <div class="row">
+                <i data-lucide="notebook-pen" class="icon"></i>
+                <h4 class="h4">Registration Form</h4>
+              </div>
+              <p class="muted small">
+                Fill out the online application with guardian details.
+              </p>
+            </div>
+          </li>
 
-        <input class="input" name="email" placeholder="Parent Email" type="email" required />
-        <input class="input" name="parentPhone" placeholder="Parent Phone" type="tel" required />
+          <li class="timeline-item">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
+              <div class="row">
+                <i data-lucide="flask-conical" class="icon"></i>
+                <h4 class="h4">Math Admission Test (1 hr)</h4>
+              </div>
+              <p class="muted small">
+                Objective test to gauge fundamentals & curiosity.
+              </p>
+            </div>
+          </li>
 
-        <textarea class="input" name="message" placeholder="Tell us about the student's interests" rows="4"></textarea>
+          <li class="timeline-item">
+            <span class="timeline-index" aria-hidden="true"></span>
+            <div class="card card--step">
+              <div class="row">
+                <i data-lucide="brain-circuit" class="icon"></i>
+                <h4 class="h4">Cognitive Personality Test</h4>
+              </div>
+              <p class="muted small">
+                A short assessment to understand learning style.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-        <input type="hidden" name="form-name" value="Robo Club Application" />
-        <div id="applyStatus" class="form-status" aria-live="polite"></div>
+    <!-- Syllabus -->
+    <section id="syllabus">
+      <div class="container">
+        <div class="subtitle">
+          <i data-lucide="brain-circuit" class="icon"></i> Syllabus Overview
+        </div>
+        <div class="grid grid-4">
+          <article class="card">
+            <div class="row">
+              <i data-lucide="cpu" class="icon-lg"></i>
+              <h4 class="h4">Basic Python</h4>
+            </div>
+            <ul class="list">
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Variables
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Data types
+              </li>
+              <li><i data-lucide="check-circle-2" class="icon"></i> Loops</li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Functions
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Hands-on labs
+              </li>
+            </ul>
+            <p class="muted2 small mt-12">
+              Foundation for thinking like a programmer.
+            </p>
+          </article>
 
-        <button id="applySubmit" type="submit" class="btn btn-primary center">
-          Submit Application
-        </button>
-      </form>
+          <article class="card">
+            <div class="row">
+              <i data-lucide="graduation-cap" class="icon-lg"></i>
+              <h4 class="h4">Basic ML</h4>
+            </div>
+            <ul class="list">
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Intro to ML
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Linear
+                Regression (2 projects)
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Logistic
+                Regression (2 projects)
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Concepts over
+                depth
+              </li>
+            </ul>
+            <p class="muted2 small mt-12">
+              We introduce ML gently—no heavy math required.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="row">
+              <i data-lucide="bot" class="icon-lg"></i>
+              <h4 class="h4">Basics of Robotics</h4>
+            </div>
+            <ul class="list">
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Sensors &
+                actuators
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Control basics
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Safety &
+                ethics
+              </li>
+            </ul>
+            <p class="muted2 small mt-12">
+              Build confidence with real hardware.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="row">
+              <i data-lucide="sparkles" class="icon-lg"></i>
+              <h4 class="h4">Final Robotics Project</h4>
+            </div>
+            <ul class="list">
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Team build
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Demo day
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon"></i> Parent
+                showcase
+              </li>
+            </ul>
+            <p class="muted2 small mt-12">Ship a working robot by the end!</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div class="grid grid-2 align-center">
+            <div>
+              <h3 class="title">Ready to join SkolarAi Robo Club?</h3>
+              <p class="muted mt-8">
+                Seats are limited. Apply today and we’ll email the test schedule
+                and next steps.
+              </p>
+            </div>
+            <div class="right">
+              <button class="btn btn-white" id="applyCta">
+                Apply in 2 minutes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container py-24">
+        <div class="footer-grid">
+          <div>
+            <div class="row">
+              <i data-lucide="bot" class="icon"></i>
+              <span class="fw-700">SkolarAi Robo Club</span>
+            </div>
+            <p class="muted2 mt-8">
+              Nurturing young builders with code, curiosity, and robots.
+            </p>
+          </div>
+          <div>
+            <p class="fw-700 mb-8">Quick Links</p>
+            <ul class="ul">
+              <li><a href="#eligibility">Eligibility</a></li>
+              <li><a href="#admission">Admission Process</a></li>
+              <li><a href="#syllabus">Syllabus</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="fw-700 mb-8">Contact</p>
+            <div class="row">
+              <i data-lucide="phone" class="icon"></i>
+              <span>+91-8005345047</span>
+            </div>
+            <div class="row mt-8">
+              <i data-lucide="mail" class="icon"></i>
+              <span>admin@skolarai.com</span>
+            </div>
+          </div>
+        </div>
+        <div class="muted2 center small mt-12">
+          © <span id="year"></span> SkolarAi Labs LLP. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div
+      class="modal"
+      id="applyModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-card">
+        <div class="row-between">
+          <h4 class="h4" style="margin-bottom: 4px">Apply to Robo Club</h4>
+          <button id="closeModal" class="muted btn-reset">Close</button>
+        </div>
+        <p class="muted small mt-8">
+          Fill this quick form and we will share the admission test schedule via
+          email.
+        </p>
+
+        <form
+          id="applyForm"
+          action="https://formspree.io/f/xzzjpdzv"
+          method="POST"
+          class="form"
+          novalidate
+        >
+          <div class="form-row two">
+            <input
+              class="input"
+              name="studentName"
+              placeholder="Student Name"
+              required
+            />
+            <input
+              class="input"
+              name="age"
+              placeholder="Age (10–14)"
+              type="number"
+              min="10"
+              max="15"
+              required
+            />
+          </div>
+
+          <input
+            class="input"
+            name="email"
+            placeholder="Parent Email"
+            type="email"
+            required
+          />
+          <input
+            class="input"
+            name="parentPhone"
+            placeholder="Parent Phone"
+            type="tel"
+            required
+          />
+
+          <textarea
+            class="input"
+            name="message"
+            placeholder="Tell us about the student's interests"
+            rows="4"
+          ></textarea>
+
+          <input type="hidden" name="form-name" value="Robo Club Application" />
+          <div id="applyStatus" class="form-status" aria-live="polite"></div>
+
+          <button id="applySubmit" type="submit" class="btn btn-primary center">
+            Submit Application
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
