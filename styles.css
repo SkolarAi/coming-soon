@@ -940,3 +940,55 @@ textarea:focus {
 .muted2 {
   color: var(--muted2);
 }
+
+/* FAQ Section */
+.faq-wrapper {
+  margin-top: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.03)
+  );
+  transition: all 0.25s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  list-style: none;
+  position: relative;
+  padding-right: 24px;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
