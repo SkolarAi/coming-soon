@@ -965,31 +965,38 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
-.faq-item summary{
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
+/* ===== FIX FAQ DEFAULT ARROW ===== */
+.faq-item summary {
   list-style: none;
-  position: relative;
-  padding-right: 24px;
 }
 
 .faq-item summary::-webkit-details-marker {
   display: none;
 }
 
+/* Make summary clean */
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  padding-right: 28px;
+}
+
+/* Custom + / - icon */
 .faq-item summary::after {
   content: "+";
   position: absolute;
   right: 0;
-  font-size: 18px;
+  top: 0;
+  font-size: 20px;
+  font-weight: 700;
   transition: transform 0.2s ease;
 }
 
 .faq-item[open] summary::after {
   content: "−";
 }
-
 .faq-item p {
   margin-top: 12px;
   color: var(--muted);
